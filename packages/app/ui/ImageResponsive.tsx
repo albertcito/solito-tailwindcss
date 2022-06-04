@@ -45,7 +45,10 @@ function ImageResponsive({ uri, alt }: ImageResponsiveProps) {
         const { width, height } = await operation.start();
         setImageAspectRatio(width / height);
       } catch (error) {
-        if (__DEV__) console.warn(error);
+        if (__DEV__) {
+          // eslint-disable-next-line no-console
+          console.error(error);
+        }
       }
     };
     sideEffect();

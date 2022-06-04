@@ -1,31 +1,27 @@
-import { NavigationContainer } from '@react-navigation/native'
-import * as Linking from 'expo-linking'
-import { useMemo } from 'react'
+import { FC, useMemo } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import * as Linking from 'expo-linking';
 
-export function NavigationProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <NavigationContainer
-      linking={useMemo(
-        () => ({
-          prefixes: [Linking.createURL('/')],
-          config: {
-            initialRouteName: 'articles',
-            screens: {
-              articles: '',
-              article: 'articles/:slug',
-              audios: 'audios',
-              audio: 'audios/:slug',
-            },
+const NavigationProvider: FC = ({ children }) => (
+  <NavigationContainer
+    linking={useMemo(
+      () => ({
+        prefixes: [Linking.createURL('/')],
+        config: {
+          initialRouteName: 'articles',
+          screens: {
+            articles: '',
+            article: 'articles/:slug',
+            audios: 'audios',
+            audio: 'audios/:slug',
           },
-        }),
-        []
-      )}
-    >
-      {children}
-    </NavigationContainer>
-  )
-}
+        },
+      }),
+      [],
+    )}
+  >
+    {children}
+  </NavigationContainer>
+);
+
+export default NavigationProvider;

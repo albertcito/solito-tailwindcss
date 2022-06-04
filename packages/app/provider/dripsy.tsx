@@ -1,4 +1,5 @@
-import { DripsyProvider, makeTheme } from 'dripsy'
+import { DripsyProvider, makeTheme } from 'dripsy';
+import { FC } from 'react';
 
 const theme = makeTheme({
   // https://www.dripsy.xyz/usage/theming/create
@@ -7,16 +8,16 @@ const theme = makeTheme({
       fontSize: 16,
     },
   },
-})
+});
 
-export function Dripsy({ children }: { children: React.ReactNode }) {
-  return (
-    <DripsyProvider
-      theme={theme}
+const Dripsy: FC = ({ children }) => (
+  <DripsyProvider
+    theme={theme}
       // this disables SSR, since react-native-web doesn't have support for it (yet)
-      ssr
-    >
-      {children}
-    </DripsyProvider>
-  )
-}
+    ssr
+  >
+    {children}
+  </DripsyProvider>
+);
+
+export default Dripsy;

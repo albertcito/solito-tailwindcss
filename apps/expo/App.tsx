@@ -1,4 +1,4 @@
-import { Provider } from 'app/provider';
+import Provider from 'app/provider';
 import { createClient, Provider as URQL } from 'urql';
 // eslint-disable-next-line camelcase
 import { useFonts, PTSerif_400Regular, PTSerif_700Bold } from '@expo-google-fonts/pt-serif';
@@ -11,8 +11,8 @@ const client = createClient({
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    PTSerif_400Regular,
-    PTSerif_700Bold,
+    // eslint-disable-next-line camelcase
+    PTSerif_400Regular, PTSerif_700Bold,
   });
 
   if (!fontsLoaded) {

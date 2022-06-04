@@ -1,5 +1,5 @@
 import { AudiosQuery } from 'app/graphql/generated/generated';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { FC } from 'react';
 import { Link } from 'solito/link';
 import PostBox from './PodcastBox';

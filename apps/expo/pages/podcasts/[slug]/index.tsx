@@ -4,8 +4,8 @@ import { ScrollView, Text, View } from 'react-native';
 import {
   AudioIdType, useAudioQuery,
 } from 'app/graphql/generated/generated';
-import SafeArea from '../../../components/SafeArea'
 import { createParam } from 'solito';
+import SafeArea from '../../../components/SafeArea';
 
 const { useParam } = createParam<{ slug: string }>();
 

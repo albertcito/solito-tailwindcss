@@ -15,7 +15,10 @@ try {
     playThroughEarpieceAndroid: false,
   });
 } catch (error) {
-  console.log(error);
+  if (__DEV__) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
 }
 
 let currentAudio = '';

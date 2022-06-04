@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { NativeNavigationPosts, NativeNavigationAudios } from './StackNavigator';
 
 const Tab = createBottomTabNavigator<{
-  home: undefined
+  posts: undefined
   podcasts: undefined
 }>();
 
@@ -31,7 +31,7 @@ export default function TabNavigator({ paddingBottom }: TabNavigatorProps) {
       sceneContainerStyle={{ paddingBottom }}
     >
       <Tab.Screen
-        name="home"
+        name="posts"
         component={NativeNavigationPosts}
         options={{ tabBarIcon: HomeIcon }}
       />

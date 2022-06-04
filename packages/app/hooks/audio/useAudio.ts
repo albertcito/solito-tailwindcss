@@ -1,6 +1,7 @@
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from 'expo-av';
 import { useEffect, useState, useCallback } from 'react';
 import { useMutation } from 'react-query';
+// eslint-disable-next-line import/no-named-as-default
 import useGlobalProvider from '../global/useGlobalProvider';
 import audioPositionPercent from './audioPositionPercent';
 import loadAudio, { LoadAudioSuccess, AudioErrorResponse } from './loadAudio';
@@ -16,7 +17,10 @@ try {
     playThroughEarpieceAndroid: false,
   });
 } catch (error) {
-  console.log(error);
+  if (__DEV__) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
 }
 
 let currentAudio = '';

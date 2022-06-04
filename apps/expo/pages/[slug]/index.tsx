@@ -3,7 +3,7 @@ import { ScrollView, Text, View } from 'react-native';
 import { PostIdType, usePostQuery } from 'app/graphql/generated/generated';
 import { createParam } from 'solito';
 import { FC } from 'react';
-import SafeArea from '../../components/SafeArea'
+import SafeArea from '../../components/SafeArea';
 
 const { useParam } = createParam<{ slug: string }>();
 
@@ -14,16 +14,16 @@ function PostPage({ slug }: { slug: string }) {
   return (
     <ScrollView>
       <SafeArea>
-      <View>
-        {fetching && (
+        <View>
+          {fetching && (
           <Text>
             loading....
           </Text>
-        )}
-        {data?.post && (
+          )}
+          {data?.post && (
           <Post post={data?.post} />
-        )}
-      </View>
+          )}
+        </View>
       </SafeArea>
     </ScrollView>
   );

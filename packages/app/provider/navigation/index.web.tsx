@@ -2,8 +2,8 @@
 // instead, we just have a no-op here
 // for more, see: https://solito.dev/recipes/tree-shaking
 
-export const NavigationProvider = ({
-  children,
-}: {
-  children: React.ReactElement
-}) => <>{children}</>
+import { FC } from 'react';
+
+const NavigationProvider: FC = ({ children }) => <>{children}</>;
+
+export default NavigationProvider;

@@ -5,7 +5,7 @@ import {
   ScrollView, Text, View, NativeScrollEvent, RefreshControl,
 } from 'react-native';
 import useHomePosts from './useHomePosts';
-import SafeArea from '../components/SafeArea'
+import SafeArea from '../components/SafeArea';
 
 const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }: NativeScrollEvent) => {
   const paddingToBottom = 20;
