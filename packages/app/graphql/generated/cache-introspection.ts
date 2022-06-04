@@ -34,6 +34,10 @@ export default {
           },
           {
             "kind": "OBJECT",
+            "name": "MediaItem_Duracion"
+          },
+          {
+            "kind": "OBJECT",
             "name": "MediaItem_ImageAttr"
           },
           {
@@ -3841,19 +3845,19 @@ export default {
           },
           {
             "kind": "OBJECT",
-            "name": "Template_EnBlanco"
+            "name": "Template_Blank"
           },
           {
             "kind": "OBJECT",
-            "name": "Template_EntradaIndividualsinSeparadores"
+            "name": "Template_PageLargeHeader"
           },
           {
             "kind": "OBJECT",
-            "name": "Template_PginacabeceraGrande"
+            "name": "Template_PageNoSeparators"
           },
           {
             "kind": "OBJECT",
-            "name": "Template_PginasinSeparadores"
+            "name": "Template_SinglePostNoSeparators"
           }
         ]
       },
@@ -6037,6 +6041,15 @@ export default {
             "args": []
           },
           {
+            "name": "duracion",
+            "type": {
+              "kind": "OBJECT",
+              "name": "MediaItem_Duracion",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
             "name": "editingLockedBy",
             "type": {
               "kind": "OBJECT",
@@ -6635,6 +6648,34 @@ export default {
           }
         ],
         "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MediaItem_Duracion",
+        "fields": [
+          {
+            "name": "duration",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "fieldGroupName",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": [
+          {
+            "kind": "INTERFACE",
+            "name": "AcfFieldGroup"
+          }
+        ]
       },
       {
         "kind": "OBJECT",
@@ -11122,6 +11163,14 @@ export default {
               "kind": "OBJECT",
               "name": "Post_Alerts_Info",
               "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "quotes",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
             },
             "args": []
           }
@@ -16299,7 +16348,7 @@ export default {
       },
       {
         "kind": "OBJECT",
-        "name": "Template_EnBlanco",
+        "name": "Template_Blank",
         "fields": [
           {
             "name": "templateName",
@@ -16319,7 +16368,7 @@ export default {
       },
       {
         "kind": "OBJECT",
-        "name": "Template_EntradaIndividualsinSeparadores",
+        "name": "Template_PageLargeHeader",
         "fields": [
           {
             "name": "templateName",
@@ -16339,7 +16388,7 @@ export default {
       },
       {
         "kind": "OBJECT",
-        "name": "Template_PginacabeceraGrande",
+        "name": "Template_PageNoSeparators",
         "fields": [
           {
             "name": "templateName",
@@ -16359,7 +16408,7 @@ export default {
       },
       {
         "kind": "OBJECT",
-        "name": "Template_PginasinSeparadores",
+        "name": "Template_SinglePostNoSeparators",
         "fields": [
           {
             "name": "templateName",

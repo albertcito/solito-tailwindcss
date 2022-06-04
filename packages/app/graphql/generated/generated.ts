@@ -2503,9 +2503,9 @@ export type DeleteUserPayload = {
 /** The discussion setting type */
 export type DiscussionSettings = {
   __typename?: 'DiscussionSettings';
-  /** Permitir a la gente enviar comentarios en las nuevas entradas. */
+  /** Allow people to submit comments on new posts. */
   defaultCommentStatus?: Maybe<Scalars['String']>;
-  /** Permite avisos de enlaces desde otros sitios (pingbacks y trackbacks) en los nuevos artículos. */
+  /** Allow link notifications from other blogs (pingbacks and trackbacks) on new articles. */
   defaultPingStatus?: Maybe<Scalars['String']>;
 };
 
@@ -2568,23 +2568,23 @@ export type EnqueuedStylesheet = EnqueuedAsset & Node & {
 /** The general setting type */
 export type GeneralSettings = {
   __typename?: 'GeneralSettings';
-  /** Formato fecha para todas las cadenas de fecha. */
+  /** A date format for all date strings. */
   dateFormat?: Maybe<Scalars['String']>;
-  /** Descripción corta del sitio. */
+  /** Site tagline. */
   description?: Maybe<Scalars['String']>;
-  /** Esta dirección se utiliza para fines de administración, por ejemplo, avisos de nuevos usuarios. */
+  /** This address is used for admin purposes, like new user notification. */
   email?: Maybe<Scalars['String']>;
-  /** Código del idioma local de WordPress. */
+  /** WordPress locale code. */
   language?: Maybe<Scalars['String']>;
-  /** El número de día en el que la semana debe comenzar. */
+  /** A day number of the week that the week should start on. */
   startOfWeek?: Maybe<Scalars['Int']>;
-  /** Formato de hora para todas las cadenas de hora. */
+  /** A time format for all time strings. */
   timeFormat?: Maybe<Scalars['String']>;
-  /** Una ciudad en la misma zona horaria que tú. */
+  /** A city in the same timezone as you. */
   timezone?: Maybe<Scalars['String']>;
-  /** Título del sitio. */
+  /** Site title. */
   title?: Maybe<Scalars['String']>;
-  /** URL del sitio. */
+  /** Site URL. */
   url?: Maybe<Scalars['String']>;
 };
 
@@ -2809,6 +2809,8 @@ export type MediaItem = ContentNode & DatabaseIdentifier & HierarchicalContentNo
   description?: Maybe<Scalars['String']>;
   /** The desired slug of the post */
   desiredSlug?: Maybe<Scalars['String']>;
+  /** Added to the GraphQL Schema because the ACF Field Group &quot;Archivo de audio: Duración&quot; was set to Show in GraphQL. */
+  duracion?: Maybe<MediaItem_Duracion>;
   /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
   editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
   /** The RSS enclosure for the object */
@@ -3123,6 +3125,15 @@ export type MediaItemToCommentConnectionWhereArgs = {
   status?: InputMaybe<Scalars['String']>;
   /** Include comments for a specific user ID. */
   userId?: InputMaybe<Scalars['ID']>;
+};
+
+/** Field Group */
+export type MediaItem_Duracion = AcfFieldGroup & {
+  __typename?: 'MediaItem_Duracion';
+  /** Duracion en milisegundos. 1 segundo = 1000 */
+  duration?: Maybe<Scalars['Float']>;
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>;
 };
 
 /** Field Group */
@@ -5259,6 +5270,7 @@ export type Post_Alerts = AcfFieldGroup & {
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>;
   info?: Maybe<Post_Alerts_Info>;
+  quotes?: Maybe<Scalars['String']>;
 };
 
 /** Field Group */
@@ -5273,7 +5285,7 @@ export type Post_Alerts_Info = AcfFieldGroup & {
 /** The reading setting type */
 export type ReadingSettings = {
   __typename?: 'ReadingSettings';
-  /** Páginas de blog mostradas como máximo. */
+  /** Blog pages show at most. */
   postsPerPage?: Maybe<Scalars['Int']>;
 };
 
@@ -7809,29 +7821,29 @@ export type TaxonomyToContentTypeConnectionEdge = {
 };
 
 /** The template assigned to the node */
-export type Template_EnBlanco = ContentTemplate & {
-  __typename?: 'Template_EnBlanco';
+export type Template_Blank = ContentTemplate & {
+  __typename?: 'Template_Blank';
   /** The name of the template */
   templateName?: Maybe<Scalars['String']>;
 };
 
 /** The template assigned to the node */
-export type Template_EntradaIndividualsinSeparadores = ContentTemplate & {
-  __typename?: 'Template_EntradaIndividualsinSeparadores';
+export type Template_PageLargeHeader = ContentTemplate & {
+  __typename?: 'Template_PageLargeHeader';
   /** The name of the template */
   templateName?: Maybe<Scalars['String']>;
 };
 
 /** The template assigned to the node */
-export type Template_PginacabeceraGrande = ContentTemplate & {
-  __typename?: 'Template_PginacabeceraGrande';
+export type Template_PageNoSeparators = ContentTemplate & {
+  __typename?: 'Template_PageNoSeparators';
   /** The name of the template */
   templateName?: Maybe<Scalars['String']>;
 };
 
 /** The template assigned to the node */
-export type Template_PginasinSeparadores = ContentTemplate & {
-  __typename?: 'Template_PginasinSeparadores';
+export type Template_SinglePostNoSeparators = ContentTemplate & {
+  __typename?: 'Template_SinglePostNoSeparators';
   /** The name of the template */
   templateName?: Maybe<Scalars['String']>;
 };
@@ -8322,35 +8334,35 @@ export type UpdatePostPayload = {
 export type UpdateSettingsInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']>;
-  /** Permitir a la gente enviar comentarios en las nuevas entradas. */
+  /** Allow people to submit comments on new posts. */
   discussionSettingsDefaultCommentStatus?: InputMaybe<Scalars['String']>;
-  /** Permite avisos de enlaces desde otros sitios (pingbacks y trackbacks) en los nuevos artículos. */
+  /** Allow link notifications from other blogs (pingbacks and trackbacks) on new articles. */
   discussionSettingsDefaultPingStatus?: InputMaybe<Scalars['String']>;
-  /** Formato fecha para todas las cadenas de fecha. */
+  /** A date format for all date strings. */
   generalSettingsDateFormat?: InputMaybe<Scalars['String']>;
-  /** Descripción corta del sitio. */
+  /** Site tagline. */
   generalSettingsDescription?: InputMaybe<Scalars['String']>;
-  /** Esta dirección se utiliza para fines de administración, por ejemplo, avisos de nuevos usuarios. */
+  /** This address is used for admin purposes, like new user notification. */
   generalSettingsEmail?: InputMaybe<Scalars['String']>;
-  /** Código del idioma local de WordPress. */
+  /** WordPress locale code. */
   generalSettingsLanguage?: InputMaybe<Scalars['String']>;
-  /** El número de día en el que la semana debe comenzar. */
+  /** A day number of the week that the week should start on. */
   generalSettingsStartOfWeek?: InputMaybe<Scalars['Int']>;
-  /** Formato de hora para todas las cadenas de hora. */
+  /** A time format for all time strings. */
   generalSettingsTimeFormat?: InputMaybe<Scalars['String']>;
-  /** Una ciudad en la misma zona horaria que tú. */
+  /** A city in the same timezone as you. */
   generalSettingsTimezone?: InputMaybe<Scalars['String']>;
-  /** Título del sitio. */
+  /** Site title. */
   generalSettingsTitle?: InputMaybe<Scalars['String']>;
-  /** URL del sitio. */
+  /** Site URL. */
   generalSettingsUrl?: InputMaybe<Scalars['String']>;
-  /** Páginas de blog mostradas como máximo. */
+  /** Blog pages show at most. */
   readingSettingsPostsPerPage?: InputMaybe<Scalars['Int']>;
-  /** Categoria de entrada por defecto */
+  /** Default post category. */
   writingSettingsDefaultCategory?: InputMaybe<Scalars['Int']>;
-  /** Formato de la entrada por defecto. */
+  /** Default post format. */
   writingSettingsDefaultPostFormat?: InputMaybe<Scalars['String']>;
-  /** Convierte emoticonos como :-) y :-P en gráficos en la pantalla. */
+  /** Convert emoticons like :-) and :-P to graphics on display. */
   writingSettingsUseSmilies?: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -9125,11 +9137,11 @@ export type WpPageInfo = {
 /** The writing setting type */
 export type WritingSettings = {
   __typename?: 'WritingSettings';
-  /** Categoria de entrada por defecto */
+  /** Default post category. */
   defaultCategory?: Maybe<Scalars['Int']>;
-  /** Formato de la entrada por defecto. */
+  /** Default post format. */
   defaultPostFormat?: Maybe<Scalars['String']>;
-  /** Convierte emoticonos como :-) y :-P en gráficos en la pantalla. */
+  /** Convert emoticons like :-) and :-P to graphics on display. */
   useSmilies?: Maybe<Scalars['Boolean']>;
 };
 

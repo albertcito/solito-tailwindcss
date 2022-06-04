@@ -1,0 +1,15 @@
+overwrite: true
+schema: "https://noseconformen.com/index.php?graphql"
+documents: "packages/app/graphql/resolvers/**/*/*.graphql.ts"
+generates:
+  packages/app/graphql/generated/generated.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-urql"
+    config:
+      withHooks: true
+      maybeValue: T | undefined
+  packages/app/graphql/generated/cache-introspection.ts:
+    plugins:
+      - "urql-introspection"

@@ -20,5 +20,16 @@
     "solito": "latest",
     "urql": "^2.2.1"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/introspection": "^2.1.1",
+    "@graphql-codegen/typescript": "^2.4.11",
+    "@graphql-codegen/typescript-document-nodes": "^2.2.11",
+    "@graphql-codegen/typescript-graphql-files-modules": "^2.1.1",
+    "@graphql-codegen/typescript-operations": "^2.4.0",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.14",
+    "@graphql-codegen/typescript-urql": "^3.5.10",
+    "@graphql-codegen/urql-introspection": "^2.1.1"
+  }
 }
