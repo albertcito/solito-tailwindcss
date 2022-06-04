@@ -88,9 +88,9 @@ const useAudioTime = () => {
   const getAudioStatus = useCallback(
     (url?: string) => (
       url && isCurrentAudio(url)
-        ? { percent, playing }
-        : { percent: 0, playing: false }),
-    [isCurrentAudio, percent, playing],
+        ? { percent, playing, error }
+        : { percent: 0, playing: false, error: undefined }),
+    [isCurrentAudio, percent, playing, error],
   );
 
   return {

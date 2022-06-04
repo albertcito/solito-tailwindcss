@@ -20,7 +20,6 @@ While it's pretty barebones, it does a lot of the annoying config for you. The f
 
 - `solito` for cross-platform navigation
 - `moti` for animations
-- `dripsy` for theming/design (you can bring your own, too)
 - Expo SDK 44
 - Next.js 12
 - React Navigation 6

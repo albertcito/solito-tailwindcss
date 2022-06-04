@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { TailwindProvider } from 'tailwindcss-react-native';
-import Dripsy from './dripsy';
 import NavigationProvider from './navigation';
 import { AudioProvider } from '../hooks/audio/useAudioProvider';
 import { GlobalProvider } from '../hooks/global/useGlobalProvider';
@@ -26,7 +25,7 @@ const Provider: FC = ({ children }) => (
         <AudioProvider>
           <NavigationProvider>
             <TailwindProvider>
-              <Dripsy>{children}</Dripsy>
+              {children}
             </TailwindProvider>
           </NavigationProvider>
         </AudioProvider>
