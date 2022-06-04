@@ -1,8 +1,9 @@
-import { View, Text } from 'react-native';
-import { NativeNavigation } from './navigation'
-import { Provider } from 'app/provider'
+import { Provider } from 'app/provider';
 import { createClient, Provider as URQL } from 'urql';
+// eslint-disable-next-line camelcase
 import { useFonts, PTSerif_400Regular, PTSerif_700Bold } from '@expo-google-fonts/pt-serif';
+import { View, Text } from 'react-native';
+import NavigationMenu from './navigation';
 
 const client = createClient({
   url: 'https://noseconformen.com/index.php?graphql',
@@ -23,11 +24,12 @@ export default function App() {
       </Provider>
     );
   }
+
   return (
     <URQL value={client}>
       <Provider>
-        <NativeNavigation />
+        <NavigationMenu />
       </Provider>
     </URQL>
-  )
+  );
 }

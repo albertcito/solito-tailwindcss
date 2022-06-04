@@ -19,16 +19,8 @@ const PodcastsBox: FC<PodcastsBoxProps> = ({ podcasts }) => (
           key={post?.slug}
           className="w-full pb-4"
         >
-          <View className="text-gray-200 mt-20">
+          <View className="mt-2">
             <Link href={`/audios/${post.slug}`}>
-              <Text>
-                {post.title}
-              </Text>
-              <View className="mt-20">
-                <Text>
-                  aloja
-                </Text>
-              </View>
               <PostBox podcast={post} />
             </Link>
           </View>

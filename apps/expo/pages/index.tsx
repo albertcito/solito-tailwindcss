@@ -5,6 +5,7 @@ import {
   ScrollView, Text, View, NativeScrollEvent, RefreshControl,
 } from 'react-native';
 import useHomePosts from './useHomePosts';
+import SafeArea from '../components/SafeArea'
 
 const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }: NativeScrollEvent) => {
   const paddingToBottom = 20;
@@ -33,21 +34,23 @@ const Index: FC = () => {
       }}
       scrollEventThrottle={400}
     >
-      <View className="pt-3">
-        {fetching && (
-          <Text>
-            loading data....
-          </Text>
-        )}
-        {error && (
-          <Text>
-            {error.message}
-          </Text>
-        )}
-        {data?.posts?.nodes && (
-          <PostsBox posts={data?.posts?.nodes} />
-        )}
-      </View>
+      <SafeArea>
+        <View className="pt-3">
+          {fetching && (
+            <Text>
+              loading data....
+            </Text>
+          )}
+          {error && (
+            <Text>
+              {error.message}
+            </Text>
+          )}
+          {data?.posts?.nodes && (
+            <PostsBox posts={data?.posts?.nodes} />
+          )}
+        </View>
+      </SafeArea>
     </ScrollView>
   );
 };

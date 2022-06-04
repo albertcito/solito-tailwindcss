@@ -1,32 +1,30 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { View } from 'react-native';
 
-import HomeScreen from '../pages/index'
-import UserDetailScreen from '../pages/[slug]'
+import useGlobalProvider from 'app/hooks/global/useGlobalProvider';
+import useSafeArea from 'app/provider/safe-area/use-safe-area';
+import AudioWidgetLocal from '../components/AudioWidgetLocal';
+import TabNavigator from './TabNavigator';
 
-const Stack = createNativeStackNavigator<{
-  home: undefined
-  'user-detail': {
-    id: string
-  }
-}>()
-
-export function NativeNavigation() {
+const GlobalComponent = () => {
+  const { audioLoaded } = useGlobalProvider();
+  const insets = useSafeArea();
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="home"
-        component={HomeScreen}
-        options={{
-          title: 'Home',
-        }}
-      />
-      <Stack.Screen
-        name="user-detail"
-        component={UserDetailScreen}
-        options={{
-          title: 'User',
-        }}
-      />
-    </Stack.Navigator>
-  )
+    <>
+      {(insets.top > 0) && (
+      <View className=" bg-black/50 h-12 absolute w-full top-0 z-10" />
+      )}
+      {audioLoaded && (
+      <AudioWidgetLocal />
+      )}
+    </>
+  );
+};
+
+export default function MyTabs() {
+  return (
+    <View className="flex-1 h-full flex-direction-column">
+      <GlobalComponent />
+      <TabNavigator />
+    </View>
+  );
 }

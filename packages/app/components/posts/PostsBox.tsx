@@ -20,7 +20,7 @@ const PostsBox: FC<PostsBoxProps> = ({ posts }) => (
           className="w-full md:w-1/3 sm:1/2 mb-3"
         >
           <View className="bg-gray-200 border rounded-lg flex-1 mx-2">
-            <Link href={`/user/${post.slug}`}>
+            <Link href={`/articles/${post.slug}`}>
               <PostBox post={post} />
             </Link>
           </View>
