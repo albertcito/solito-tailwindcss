@@ -19,7 +19,6 @@ While it's pretty barebones, it does a lot of the annoying config for you. The f
 ## 📦 Included packages
 
 - `solito` for cross-platform navigation
-- `moti` for animations
 - Expo SDK 44
 - Next.js 12
 - React Navigation 6

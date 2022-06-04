@@ -8,9 +8,6 @@ const { withExpo } = require('@expo/next-adapter');
 const withPlugins = require('next-compose-plugins');
 const withTM = require('next-transpile-modules')([
   'solito',
-  'moti',
-  '@motify/core',
-  '@motify/components',
   'app',
 ]);
 
