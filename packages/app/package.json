@@ -1,0 +1,23 @@
+{
+  "version": "0.0.0",
+  "name": "app",
+  "main": "index.ts",
+  "dependencies": {
+    "@expo-google-fonts/pt-serif": "^0.2.2",
+    "@formidable-webview/webshell": "^2.6.0",
+    "@react-navigation/native": "^6.0.8",
+    "@react-navigation/native-stack": "^6.5.0",
+    "classnames": "^2.3.1",
+    "dripsy": "^3.6.0",
+    "expo-av": "^11.2.3",
+    "expo-linking": "^3.0.0",
+    "graphql": "^16.5.0",
+    "graphql-tag": "^2.12.6",
+    "moti": "canary",
+    "react-native-webview": "^11.21.1",
+    "react-query": "^3.39.1",
+    "solito": "latest",
+    "urql": "^2.2.1"
+  },
+  "sideEffects": false
+}
