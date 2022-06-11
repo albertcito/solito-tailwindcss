@@ -37,17 +37,20 @@ export default class AudioList {
     }
   }
 
-  stopAudio = async () => {
+  pauseAudio = async () => {
     const audio = this.getCurrentAudio();
     if (audio) {
-      await audio.sound.stopAsync();
+      await audio.sound.pauseAsync();
     }
   };
 
   async loadAudio(url: string, loadAudio: () => Promise<LoadAudioSuccess>) {
-    this.stopAudio();
+    this.pauseAudio();
     this.audioURL = url;
-    const audio = await loadAudio();
+    const probablyAudio = this.audios[url];
+    const audio = probablyAudio?.status.isLoaded
+      ? probablyAudio
+      : await loadAudio();
     this.audios[url] = audio;
     return audio;
   }

@@ -31,8 +31,8 @@ const useAudioTime = () => {
     setData, downloadAudio, isLoading, error,
   } = useAudioGlobal();
 
-  const [playing, setPlaying] = useState<boolean>(false);
   const [duration, setDuration] = useState<number>(0);
+  const [playing, setPlaying] = useState<boolean>(false);
   const [position, setPosition] = useState<number>(0);
   const [didJustFinish, setDidJustFinish] = useState<boolean>();
   const [percent, setPercent] = useState<number>(0);
@@ -50,7 +50,7 @@ const useAudioTime = () => {
     [position],
   );
 
-  const loadAndPlayNewSong = useCallback(async (url: string) => {
+  const playSong = useCallback(async (url: string) => {
     setData({
       artist: 'albert',
       album: 'jamon',
@@ -76,18 +76,18 @@ const useAudioTime = () => {
         }
       });
     } else {
-      list.stopAudio();
+      list.pauseAudio();
     }
   }, [downloadAudio, setData]);
 
   const play = useCallback(async (url: string) => {
     setAudioLoaded(true);
     if (!list.isCurrentAudio(url) || !list.getCurrentAudio()?.status.isLoaded) {
-      loadAndPlayNewSong(url);
+      playSong(url);
     } else {
       list.tooglePlay(playing);
     }
-  }, [loadAndPlayNewSong, playing, setAudioLoaded]);
+  }, [playSong, playing, setAudioLoaded]);
 
   const getAudioStatus = useCallback(
     (url?: string) => (
