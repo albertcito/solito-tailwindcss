@@ -3,6 +3,7 @@ import { Pressable, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useTailwind } from 'tailwindcss-react-native';
 
+import useAudioTime from 'app/hooks/audio/useAudioTimeProvider';
 import useAudioProvider from 'app/hooks/audio/useAudioProvider';
 import AudioPlayerSlider from '../../AudioWidget/AudioPlayerSlider';
 import PlayPauseButton from './PlayPauseButton';
@@ -20,7 +21,8 @@ const AudioPlayer: FC<AudioPlayerProps> = ({
   artist,
   album,
 }) => {
-  const { play, getAudioStatus, forward } = useAudioProvider();
+  const { play, forward } = useAudioProvider();
+  const { getAudioStatus } = useAudioTime();
   const { percent, playing } = useMemo(() => getAudioStatus(url), [getAudioStatus, url]);
   const tw = useTailwind();
   const { backgroundColor } = tw('bg-blue-500');

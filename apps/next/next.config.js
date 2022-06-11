@@ -9,7 +9,6 @@ const withPlugins = require('next-compose-plugins');
 const withTM = require('next-transpile-modules')([
   'solito',
   'app',
-  '@expo/vector-icons',
 ]);
 
 const withFonts = require('next-fonts');

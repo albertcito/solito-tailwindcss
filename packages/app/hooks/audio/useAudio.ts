@@ -1,9 +1,8 @@
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from 'expo-av';
-import { useEffect, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useMutation } from 'react-query';
 // eslint-disable-next-line import/no-named-as-default
 import useGlobalProvider from '../global/useGlobalProvider';
-import audioPositionPercent from './audioPositionPercent';
 import loadAudio, { LoadAudioSuccess, AudioErrorResponse } from './loadAudio';
 
 try {
@@ -17,15 +16,15 @@ try {
     playThroughEarpieceAndroid: false,
   });
 } catch (error) {
-  if (__DEV__) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-  }
+  // if (__DEV__) {
+  // eslint-disable-next-line no-console
+  console.error(error);
+  // }
 }
 
 let currentAudio = '';
 const sounds : Record<string, LoadAudioSuccess> = {};
-interface AudioExtra {
+export interface AudioExtra {
   artist?: string;
   album?: string;
 }
@@ -40,79 +39,55 @@ const useAudio = () => {
     (url) => loadAudio(url),
   );
 
+  const [audio, setAudio] = useState<LoadAudioSuccess>();
   const [slug, setSlug] = useState<string>('');
   const [metaData, setMetaData] = useState<AudioExtra>({});
   const [duration, setDuration] = useState<number>(0);
   const [position, setPosition] = useState<number>(0);
   const [playing, setPlaying] = useState<boolean>(false);
-  const [didJustFinish, setDidJustFinish] = useState<boolean>();
-  const [percent, setPercent] = useState<number>(0);
-
-  useEffect(() => {
-    setPercent(audioPositionPercent(duration, position));
-  }, [duration, position]);
 
   const tooglePlay = async () => {
-    const audio = sounds[currentAudio];
-    if (audio) {
+    const audioLoaded = sounds[currentAudio];
+    if (audioLoaded) {
       if (playing) {
-        await audio.sound.pauseAsync();
+        await audioLoaded.sound.pauseAsync();
       } else {
-        await audio.sound.playAsync();
+        await audioLoaded.sound.playAsync();
       }
     }
   };
 
-  useEffect(() => {
-    const audio = sounds[currentAudio];
-    if (didJustFinish && audio) {
-      audio.sound.stopAsync();
-    }
-  }, [didJustFinish]);
-
-  const loadStatusSong = (newSound: LoadAudioSuccess) => {
-    setDuration(newSound.status.durationMillis ?? 0);
-    setPlaying(newSound.status.isPlaying);
-    setPosition(newSound.status.positionMillis);
-    setDidJustFinish(newSound.status.didJustFinish);
-
-    newSound.sound.setOnPlaybackStatusUpdate((status) => {
-      if ('durationMillis' in status) {
-        setPlaying(status.isPlaying);
-        setPosition(status.positionMillis);
-        setDidJustFinish(status.didJustFinish);
-      }
-    });
-  };
-
-  const removeAudio = async (audio?: LoadAudioSuccess) => {
-    if (audio) {
-      await audio.sound.stopAsync();
-      audio.sound.unloadAsync();
+  const removeAudio = async (audioLoaded?: LoadAudioSuccess) => {
+    if (audioLoaded) {
+      await audioLoaded.sound.stopAsync();
+      audioLoaded.sound.unloadAsync();
     }
   };
 
-  const forward = (time = 3000) => {
+  const forward = useCallback((time = 3000) => {
     if (
       sounds[currentAudio]
       && sounds[currentAudio]?.sound
       && sounds[currentAudio]?.status.isLoaded) {
       sounds[currentAudio]?.sound.setPositionAsync(position + time);
     }
-  };
+  }, [position]);
 
   const loadAndPlayNewSong = async (newURL: string, newSlug: string) => {
     removeAudio(sounds[currentAudio]);
     currentAudio = newURL;
-    const audio = await downloadAudio(newURL);
+    const audioLoaded = await downloadAudio(newURL);
     // download audio could take a time
     // so the new current song is other
     // because user clicks other song and it was loaded faster
     if (currentAudio === newURL) {
-      await audio.sound.playAsync();
-      loadStatusSong(audio);
+      await audioLoaded.sound.playAsync();
+      setAudio(audioLoaded);
       setSlug(newSlug);
-      sounds[audio.status.uri] = audio;
+      setDuration(audioLoaded.status.durationMillis ?? 0);
+      setPlaying(audioLoaded.status.isPlaying);
+      setPosition(audioLoaded.status.positionMillis);
+      sounds[audioLoaded.status.uri] = audioLoaded;
     } else {
       removeAudio(audio);
     }
@@ -130,14 +105,6 @@ const useAudio = () => {
 
   const isCurrentAudio = useCallback((url: string) => currentAudio === url, []);
 
-  const getAudioStatus = useCallback(
-    (url?: string) => (
-      url && isCurrentAudio(url)
-        ? { percent, playing }
-        : { percent: 0, playing: false }),
-    [isCurrentAudio, percent, playing],
-  );
-
   return {
     play,
     slug,
@@ -145,11 +112,13 @@ const useAudio = () => {
     metaData,
     tooglePlay,
     isLoading,
-    percent,
     playing,
-    getAudioStatus,
     isCurrentAudio,
     forward,
+    setSlug,
+    setMetaData,
+    duration,
+    audio,
   };
 };
 

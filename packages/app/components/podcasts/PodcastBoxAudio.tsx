@@ -2,6 +2,7 @@ import { View, Text } from 'react-native';
 import { useMemo, FC } from 'react';
 
 import useAudioProvider from 'app/hooks/audio/useAudioProvider';
+import useAudioTime from 'app/hooks/audio/useAudioTimeProvider';
 import PlayPauseButton from './podcast/PlayPauseButton';
 import AudioPlayerSlider from '../AudioWidget/AudioPlayerSlider';
 
@@ -18,7 +19,8 @@ const PodcastBoxAudio: FC<PodcastBoxAudioProps> = ({
   artist,
   album,
 }) => {
-  const { play, getAudioStatus } = useAudioProvider();
+  const { getAudioStatus } = useAudioTime();
+  const { play } = useAudioProvider();
   const { playing, percent } = useMemo(
     () => getAudioStatus(url ?? ''),
     [getAudioStatus, url],

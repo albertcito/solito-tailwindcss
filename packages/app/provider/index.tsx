@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { TailwindProvider } from 'tailwindcss-react-native';
 import NavigationProvider from './navigation';
 import { AudioProvider } from '../hooks/audio/useAudioProvider';
+import { AudioTimeProvider } from '../hooks/audio/useAudioTimeProvider';
 import { GlobalProvider } from '../hooks/global/useGlobalProvider';
 import SafeAreaProvider from './safe-area';
 
@@ -23,11 +24,13 @@ const Provider: FC = ({ children }) => (
     <SafeAreaProvider>
       <GlobalProvider>
         <AudioProvider>
-          <NavigationProvider>
-            <TailwindProvider>
-              {children}
-            </TailwindProvider>
-          </NavigationProvider>
+          <AudioTimeProvider>
+            <NavigationProvider>
+              <TailwindProvider>
+                {children}
+              </TailwindProvider>
+            </NavigationProvider>
+          </AudioTimeProvider>
         </AudioProvider>
       </GlobalProvider>
     </SafeAreaProvider>
