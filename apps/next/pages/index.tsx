@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { GetStaticProps } from 'next';
 
 import { PostsDocument, PostsQuery, PostsQueryVariables } from 'app/graphql/generated/generated';
