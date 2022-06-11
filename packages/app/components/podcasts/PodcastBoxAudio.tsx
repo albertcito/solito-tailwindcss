@@ -1,42 +1,34 @@
 import { View, Text } from 'react-native';
 import { useMemo, FC } from 'react';
 
-import useAudioProvider from 'app/hooks/audio/useAudioProvider';
 import useAudioTime from 'app/hooks/audio/useAudioTimeProvider';
 import PlayPauseButton from './podcast/PlayPauseButton';
 import AudioPlayerSlider from '../AudioWidget/AudioPlayerSlider';
 
 interface PodcastBoxAudioProps {
-  url: string
-  slug: string
+  audioURL: string
   artist?: string;
   album?: string;
 }
 
 const PodcastBoxAudio: FC<PodcastBoxAudioProps> = ({
-  url,
-  slug,
+  audioURL,
   artist,
   album,
 }) => {
   const { getAudioStatus } = useAudioTime();
-  const { play } = useAudioProvider();
-  const { playing, percent } = useMemo(
-    () => getAudioStatus(url ?? ''),
-    [getAudioStatus, url],
+  const { playing } = useMemo(
+    () => getAudioStatus(audioURL ?? ''),
+    [getAudioStatus, audioURL],
   );
   return (
     <View className="flex flex-row items-center">
       <View className="mr-2">
-        <PlayPauseButton
-          play={() => play(url, slug, { artist, album })}
-          playing={playing}
-          icon={{ size: 24, color: 'blue' }}
-        />
+        <PlayPauseButton audioURL={audioURL} icon={{ size: 24, color: 'blue' }} />
       </View>
       {playing && (
         <View className="flex-1 mr-2">
-          <AudioPlayerSlider percent={percent} />
+          <AudioPlayerSlider audioURL={audioURL} />
         </View>
       )}
       <View>

@@ -9,7 +9,7 @@ interface PodcastBoxProps {
 }
 
 const PodcastBox: FC<PodcastBoxProps> = ({ podcast }) => {
-  const mp3 = podcast.audios?.mp3?.mediaItemUrl;
+  const audioURL = podcast.audios?.mp3?.mediaItemUrl;
   return (
     <View key={podcast.slug} className="flex flex-row space-x-2">
       {podcast.featuredImage?.node?.mediaItemUrl && (
@@ -27,13 +27,12 @@ const PodcastBox: FC<PodcastBoxProps> = ({ podcast }) => {
         >
           {podcast.title}
         </Text>
-        {mp3 && (
+        {audioURL && (
           <View className="w-48">
             <PodcastBoxAudio
-              url={mp3}
               artist={podcast.title}
               album="Albert's Podcast"
-              slug={podcast.slug ?? ''}
+              audioURL={audioURL}
             />
           </View>
         )}

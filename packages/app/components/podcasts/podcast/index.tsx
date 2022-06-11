@@ -9,7 +9,7 @@ interface PodcastProps {
   audio: AudioValues;
 }
 const Podcast: FC<PodcastProps> = ({ audio }) => {
-  const mp3 = audio.audios?.mp3?.mediaItemUrl;
+  const audioURL = audio.audios?.mp3?.mediaItemUrl;
   return (
     <View
       key={audio.slug}
@@ -32,7 +32,14 @@ const Podcast: FC<PodcastProps> = ({ audio }) => {
         >
           {audio.title}
         </Text>
-        {mp3 && (<AudioPlayer url={mp3} slug={audio.slug ?? ''} artist={audio.title} album="Albert's Podcast" />)}
+        {audioURL && audio.slug && (
+          <AudioPlayer
+            url={audioURL}
+            slug={audio.slug}
+            artist={audio.title}
+            album="Albert's Podcast"
+          />
+        )}
       </View>
     </View>
   );

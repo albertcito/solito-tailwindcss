@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import useAudioTime from 'app/hooks/audio/useAudioTime';
+import { FC, useMemo } from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
 
 interface AudioPlayerSliderProps {
-  percent: number
+  audioURL: string;
   classWrap?: string;
   classPercent?: string;
   styleWrap?: StyleProp<ViewStyle>
@@ -10,25 +11,32 @@ interface AudioPlayerSliderProps {
 }
 
 const AudioPlayerSlider: FC<AudioPlayerSliderProps> = ({
-  percent,
+  audioURL,
   classWrap,
   classPercent,
   styleWrap,
   stylePercent,
-}) => (
-  <View className={classWrap} style={styleWrap}>
-    <View
-      className={classPercent}
-      style={[
-        stylePercent,
-        {
-          width: `${percent * 100}%`,
-          height: '90%',
-        },
-      ]}
-    />
-  </View>
-);
+}) => {
+  const { getAudioStatus } = useAudioTime();
+  const { percent } = useMemo(
+    () => getAudioStatus(audioURL ?? ''),
+    [getAudioStatus, audioURL],
+  );
+  return (
+    <View className={classWrap} style={styleWrap}>
+      <View
+        className={classPercent}
+        style={[
+          stylePercent,
+          {
+            width: `${percent * 100}%`,
+            height: '90%',
+          },
+        ]}
+      />
+    </View>
+  );
+};
 
 AudioPlayerSlider.defaultProps = {
   classWrap: 'h-2 bg-gray-500 w-full rounded justify-center',

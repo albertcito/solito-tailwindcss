@@ -1,30 +1,24 @@
 import { FC } from 'react';
-import {
-  View, Pressable, Text, Image,
-} from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import { View, Text, Image } from 'react-native';
 import { Link } from 'solito/link';
 
 import AudioPlayerSlider from './AudioPlayerSlider';
+import PlayPauseButton from '../podcasts/podcast/PlayPauseButton';
 
 interface AudioWidgetProps {
-  playing: boolean;
-  onPress: () => void;
-  percent: number;
   image: string;
-  title: string;
-  subTitle: string;
+  album: string;
+  artist?: string;
   slug: string;
+  audioURL: string;
 }
 
 const AudioWidget: FC<AudioWidgetProps> = ({
+  album,
+  artist,
   slug,
-  title,
-  subTitle,
   image,
-  playing,
-  percent,
-  onPress,
+  audioURL,
 }) => (
   <View className="bg-black/50">
     <View className="flex flex-row items-center p-2">
@@ -39,26 +33,20 @@ const AudioWidget: FC<AudioWidgetProps> = ({
       <Link href={`/audios/${slug}`}>
         <View className="flex-1">
           <Text className="font-semibold">
-            {title}
+            {album}
           </Text>
           <Text className="text-gray-700 text-sm">
-            {subTitle}
+            {artist}
           </Text>
         </View>
       </Link>
       <View className="">
-        <Pressable onPress={onPress} className="items-center">
-          <Entypo
-            name={playing ? 'controller-paus' : 'controller-play'}
-            size={31}
-            color="black"
-          />
-        </Pressable>
+        <PlayPauseButton audioURL={audioURL} />
       </View>
     </View>
     <View className="w-full self-center">
       <AudioPlayerSlider
-        percent={percent}
+        audioURL={audioURL}
         classWrap="h-1 bg-blue-900"
         classPercent="bg-green-300"
       />
