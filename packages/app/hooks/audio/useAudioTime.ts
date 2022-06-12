@@ -5,6 +5,7 @@ import audioPositionPercent from './audioPositionPercent';
 import { useGlobalProvider } from '../global/useGlobalProvider';
 import useAudioGlobal from './useAudioProvider';
 import AudioList from './AudioList';
+import { AudioData } from './useAudio';
 
 const list = new AudioList();
 
@@ -28,7 +29,7 @@ try {
 const useAudioTime = () => {
   const { setAudioLoaded } = useGlobalProvider();
   const {
-    setData, downloadAudio, isLoading, error,
+    downloadAudio, isLoading, error, setData,
   } = useAudioGlobal();
 
   const [duration, setDuration] = useState<number>(0);
@@ -51,14 +52,6 @@ const useAudioTime = () => {
   );
 
   const playSong = useCallback(async (url: string) => {
-    setData({
-      artist: 'albert',
-      album: 'jamon',
-      image: 'https://noseconformen.com/wp-content/uploads/2022/03/support-ucrania-stop-putin-768x576.jpg',
-      slug: url,
-      audioURL: url,
-      duration: 4500,
-    });
     const audioLoaded = await list.loadAudio(url, () => downloadAudio(url));
     // download audio could take a time
     // so the new current song is other
@@ -78,16 +71,17 @@ const useAudioTime = () => {
     } else {
       list.pauseAudio();
     }
-  }, [downloadAudio, setData]);
+  }, [downloadAudio]);
 
-  const play = useCallback(async (url: string) => {
+  const play = useCallback(async (url: string, data: AudioData) => {
     setAudioLoaded(true);
     if (!list.isCurrentAudio(url) || !list.getCurrentAudio()?.status.isLoaded) {
+      setData(data);
       playSong(url);
     } else {
       list.tooglePlay(playing);
     }
-  }, [playSong, playing, setAudioLoaded]);
+  }, [playSong, playing, setAudioLoaded, setData]);
 
   const getAudioStatus = useCallback(
     (url?: string) => (

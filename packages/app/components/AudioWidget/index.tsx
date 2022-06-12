@@ -2,51 +2,42 @@ import { FC } from 'react';
 import { View, Text, Image } from 'react-native';
 import { Link } from 'solito/link';
 
+import { AudioData } from 'app/hooks/audio/useAudio';
 import AudioPlayerSlider from './AudioPlayerSlider';
 import PlayPauseButton from '../podcasts/podcast/PlayPauseButton';
 
 interface AudioWidgetProps {
-  image: string;
-  album: string;
-  artist?: string;
-  slug: string;
-  audioURL: string;
+  data: AudioData;
 }
 
-const AudioWidget: FC<AudioWidgetProps> = ({
-  album,
-  artist,
-  slug,
-  image,
-  audioURL,
-}) => (
+const AudioWidget: FC<AudioWidgetProps> = ({ data }) => (
   <View className="bg-black/50">
     <View className="flex flex-row items-center p-2">
       <View className="h-12 w-12 mr-2">
-        <Link href={`/audios/${slug}`}>
+        <Link href={`/audios/${data.slug}`}>
           <Image
-            source={{ uri: image }}
+            source={{ uri: data.image }}
             className="h-12 w-12 rounded"
           />
         </Link>
       </View>
-      <Link href={`/audios/${slug}`}>
+      <Link href={`/audios/${data.slug}`}>
         <View className="flex-1">
           <Text className="font-semibold">
-            {album}
+            {data.album}
           </Text>
           <Text className="text-gray-700 text-sm">
-            {artist}
+            {data.artist}
           </Text>
         </View>
       </Link>
       <View className="">
-        <PlayPauseButton audioURL={audioURL} />
+        <PlayPauseButton data={data} />
       </View>
     </View>
     <View className="w-full self-center">
       <AudioPlayerSlider
-        audioURL={audioURL}
+        audioURL={data.audioURL}
         classWrap="h-1 bg-blue-900"
         classPercent="bg-green-300"
       />

@@ -16,6 +16,7 @@ export default class AudioList {
     if (audio && didJustFinish) {
       await audio.sound.stopAsync();
       audio.sound.unloadAsync();
+      delete this.audios[this.audioURL];
     }
   }
 

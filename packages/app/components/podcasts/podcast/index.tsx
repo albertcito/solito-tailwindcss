@@ -10,6 +10,15 @@ interface PodcastProps {
 }
 const Podcast: FC<PodcastProps> = ({ audio }) => {
   const audioURL = audio.audios?.mp3?.mediaItemUrl;
+  const data = {
+    album: audio.title ?? '',
+    artist: 'John Doe',
+    slug: audio.slug ?? '',
+    image: audio.featuredImage?.node?.mediaItemUrl ?? '',
+    audioURL: audio.audios?.mp3?.mediaItemUrl ?? '',
+    duration: 0,
+  };
+
   return (
     <View
       key={audio.slug}
@@ -33,12 +42,7 @@ const Podcast: FC<PodcastProps> = ({ audio }) => {
           {audio.title}
         </Text>
         {audioURL && audio.slug && (
-          <AudioPlayer
-            url={audioURL}
-            slug={audio.slug}
-            artist={audio.title}
-            album="Albert's Podcast"
-          />
+          <AudioPlayer data={data} />
         )}
       </View>
     </View>
