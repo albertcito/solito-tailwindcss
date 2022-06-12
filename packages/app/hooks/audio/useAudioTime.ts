@@ -75,11 +75,11 @@ const useAudioTime = () => {
 
   const play = useCallback(async (url: string, data: AudioData) => {
     setAudioLoaded(true);
-    if (!list.isCurrentAudio(url) || !list.getCurrentAudio()?.status.isLoaded) {
+    if (list.isCurrentAudio(url)) {
+      list.tooglePlay(playing);
+    } else {
       setData(data);
       playSong(url);
-    } else {
-      list.tooglePlay(playing);
     }
   }, [playSong, playing, setAudioLoaded, setData]);
 

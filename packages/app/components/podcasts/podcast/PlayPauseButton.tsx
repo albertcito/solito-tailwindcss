@@ -18,11 +18,10 @@ const PlayPauseButton: FC<PlayPauseButtonProps> = ({
 }) => {
   const { play, getAudioStatus } = useAudioTimeProvider();
   const { playing } = useMemo(() => getAudioStatus(data.audioURL), [getAudioStatus, data.audioURL]);
+  const iconName = playing ? 'pausecircle' : 'play';
   return (
     <Pressable onPress={() => play(data.audioURL, data)} className={className}>
-      {playing
-        ? (<AntDesign name="pausecircle" {...icon} />)
-        : (<AntDesign name="play" {...icon} />)}
+      <AntDesign name={iconName} {...icon} />
     </Pressable>
   );
 };
