@@ -17,7 +17,7 @@ const PodcastsBox: FC<PodcastsBoxProps> = ({ podcasts }) => (
       return (
         <View
           key={post?.slug}
-          className="w-full pb-4"
+          className="w-full border-b pb-4 "
         >
           <View className="mt-2">
             <Link href={`/audios/${post.slug}`}>

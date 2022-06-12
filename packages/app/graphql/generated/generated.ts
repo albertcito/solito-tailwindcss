@@ -9145,7 +9145,7 @@ export type WritingSettings = {
   useSmilies?: Maybe<Scalars['Boolean']>;
 };
 
-export type AudioFragmentFragment = { __typename?: 'Audio', slug?: string | undefined, title?: string | undefined, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', mediaItemUrl?: string | undefined } | undefined } | undefined, audios?: { __typename?: 'Audio_Audios', mp3?: { __typename?: 'MediaItem', slug?: string | undefined, mediaItemUrl?: string | undefined } | undefined } | undefined };
+export type AudioFragmentFragment = { __typename?: 'Audio', slug?: string | undefined, title?: string | undefined, date?: string | undefined, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', mediaItemUrl?: string | undefined } | undefined } | undefined, audios?: { __typename?: 'Audio_Audios', mp3?: { __typename?: 'MediaItem', slug?: string | undefined, mediaItemUrl?: string | undefined } | undefined } | undefined };
 
 export type AudioQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -9153,14 +9153,14 @@ export type AudioQueryVariables = Exact<{
 }>;
 
 
-export type AudioQuery = { __typename?: 'RootQuery', audio?: { __typename?: 'Audio', slug?: string | undefined, title?: string | undefined, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', mediaItemUrl?: string | undefined } | undefined } | undefined, audios?: { __typename?: 'Audio_Audios', mp3?: { __typename?: 'MediaItem', slug?: string | undefined, mediaItemUrl?: string | undefined } | undefined } | undefined } | undefined };
+export type AudioQuery = { __typename?: 'RootQuery', audio?: { __typename?: 'Audio', slug?: string | undefined, title?: string | undefined, date?: string | undefined, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', mediaItemUrl?: string | undefined } | undefined } | undefined, audios?: { __typename?: 'Audio_Audios', mp3?: { __typename?: 'MediaItem', slug?: string | undefined, mediaItemUrl?: string | undefined } | undefined } | undefined } | undefined };
 
 export type AudiosQueryVariables = Exact<{
   where?: InputMaybe<RootQueryToAudioConnectionWhereArgs>;
 }>;
 
 
-export type AudiosQuery = { __typename?: 'RootQuery', audios?: { __typename?: 'RootQueryToAudioConnection', pageInfo?: { __typename?: 'WPPageInfo', offsetPagination?: { __typename?: 'OffsetPaginationPageInfo', hasMore?: boolean | undefined, hasPrevious?: boolean | undefined, total?: number | undefined } | undefined } | undefined, nodes?: Array<{ __typename?: 'Audio', slug?: string | undefined, title?: string | undefined, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', mediaItemUrl?: string | undefined } | undefined } | undefined, audios?: { __typename?: 'Audio_Audios', mp3?: { __typename?: 'MediaItem', slug?: string | undefined, mediaItemUrl?: string | undefined } | undefined } | undefined } | undefined> | undefined } | undefined };
+export type AudiosQuery = { __typename?: 'RootQuery', audios?: { __typename?: 'RootQueryToAudioConnection', pageInfo?: { __typename?: 'WPPageInfo', offsetPagination?: { __typename?: 'OffsetPaginationPageInfo', hasMore?: boolean | undefined, hasPrevious?: boolean | undefined, total?: number | undefined } | undefined } | undefined, nodes?: Array<{ __typename?: 'Audio', slug?: string | undefined, title?: string | undefined, date?: string | undefined, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', mediaItemUrl?: string | undefined } | undefined } | undefined, audios?: { __typename?: 'Audio_Audios', mp3?: { __typename?: 'MediaItem', slug?: string | undefined, mediaItemUrl?: string | undefined } | undefined } | undefined } | undefined> | undefined } | undefined };
 
 export type BooksFragmentFragment = { __typename?: 'Book', slug?: string | undefined, title?: string | undefined, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', mediaItemUrl?: string | undefined } | undefined } | undefined, authorTags?: { __typename?: 'BookToAuthorTagConnection', nodes?: Array<{ __typename?: 'AuthorTag', name?: string | undefined } | undefined> | undefined } | undefined };
 
@@ -9220,6 +9220,7 @@ export const AudioFragmentFragmentDoc = gql`
     fragment AudioFragment on Audio {
   slug
   title
+  date
   featuredImage {
     node {
       mediaItemUrl

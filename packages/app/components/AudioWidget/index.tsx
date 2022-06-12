@@ -21,18 +21,18 @@ const AudioWidget: FC<AudioWidgetProps> = ({ data }) => (
           />
         </Link>
       </View>
-      <Link href={`/audios/${data.slug}`}>
-        <View className="flex-1">
+      <View className="flex-1">
+        <Link href={`/audios/${data.slug}`}>
           <Text className="font-semibold">
             {data.album}
           </Text>
           <Text className="text-gray-700 text-sm">
             {data.artist}
           </Text>
-        </View>
-      </Link>
+        </Link>
+      </View>
       <View className="">
-        <PlayPauseButton data={data} />
+        <PlayPauseButton data={data} icon={{ size: 30 }} />
       </View>
     </View>
     <View className="w-full self-center">

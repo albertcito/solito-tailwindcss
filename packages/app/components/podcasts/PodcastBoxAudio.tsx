@@ -13,7 +13,7 @@ interface PodcastBoxAudioProps {
 const PodcastBoxAudio: FC<PodcastBoxAudioProps> = ({ data }) => {
   const { getAudioStatus } = useAudioTime();
   const { playing } = useMemo(
-    () => getAudioStatus(data.audioURL ?? ''),
+    () => getAudioStatus(data.audioURL),
     [getAudioStatus, data.audioURL],
   );
   return (

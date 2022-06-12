@@ -51,6 +51,11 @@ const useAudioTime = () => {
     [position],
   );
 
+  const backward = useCallback(
+    (time = 1000) => list.setAudioPosition(position, -time),
+    [position],
+  );
+
   const playSong = useCallback(async (url: string) => {
     const audioLoaded = await list.loadAudio(url, () => downloadAudio(url));
     // download audio could take a time
@@ -86,16 +91,23 @@ const useAudioTime = () => {
   const getAudioStatus = useCallback(
     (url?: string) => (
       url && list.isCurrentAudio(url)
-        ? { percent, playing, error }
-        : { percent: 0, playing: false, error: undefined }),
-    [percent, playing, error],
+        ? {
+          percent, playing, position, error,
+        }
+        : {
+          percent: 0, position, playing: false, error: undefined,
+        }),
+    [percent, playing, error, position],
   );
 
   return {
     play,
     playing,
     forward,
+    backward,
     percent,
+    position,
+    duration,
     getAudioStatus,
     isLoading,
   };

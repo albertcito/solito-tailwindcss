@@ -4,6 +4,7 @@ export default gql`
 fragment AudioFragment on Audio {
   slug
   title
+  date
   featuredImage {
     node {
       mediaItemUrl
